@@ -10,7 +10,7 @@
                 E-mail адрес
             </label>
 
-            <Input v-model="email" placeholder="example@example.com" style="width: 200px"></Input>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight" v-model="email" placeholder="example@example.com">
 
         </div>
 
@@ -20,7 +20,7 @@
                 Имя
             </label>
 
-            <Input v-model="name" placeholder="example@example.com" style="width: 200px"></Input>
+            <input v-model="name" placeholder="example@example.com" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight">
 
         </div>
 
@@ -30,18 +30,18 @@
                 Телефон
             </label>
 
-            <Input v-model="phone" placeholder="+7xxxxxxxxxx" style="width: 200px"></Input>
+            <input v-model="phone" placeholder="+7xxxxxxxxxx" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight">
 
         </div>
 
         <div class="flex flex-row">
 
-            <Button type="primary" :loading="loading" @click="toLoading" style="width: 200px; margin-top: .75rem">
+            <Button type="primary" :loading="loading" @click="toLoading" style="width: 200px; margin-top: 1.5rem">
                 <span v-if="!loading">Получить пароль</span>
                 <span v-else>Loading...</span>
             </Button>
 
-            <Button type="success" class="mb-3" @click="toLogin" style="margin: 0.75rem 0 0 0.75rem;">Уже зарегистрированы?</Button>
+            <Button type="success" class="mb-3" @click="toLogin" style="margin: 1.5rem 0 0 0.75rem;">Уже зарегистрированы?</Button>
 
         </div>
 

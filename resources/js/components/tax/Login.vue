@@ -6,17 +6,17 @@
             Телефон
         </label>
 
-        <Input v-model="username" placeholder="+7xxxxxxxxxx" style="width: 200px"></Input>
+        <input v-model="username" placeholder="+7xxxxxxxxxx" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight">
 
         <label class="block text-grey-darker text-sm font-bold mb-2 mt-3">
             Пароль
         </label>
 
-        <Input v-model="password" style="width: 200px"></Input>
+        <input v-model="password" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight">
 
-        <div>
+        <div class="text-center">
 
-        <Button type="primary" :loading="loading" @click="sendCode" style="width: 200px; margin-top: 1rem">
+        <Button type="primary" :loading="loading" @click="sendCode" style="width: 200px; margin-top: 1.5rem">
             <span v-if="!loading">Войти</span>
         </Button>
 

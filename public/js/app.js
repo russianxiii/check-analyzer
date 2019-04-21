@@ -65189,6 +65189,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "Card",
+        { staticStyle: { width: "400px", margin: "auto" } },
         [
           _c(
             "Steps",
@@ -65237,62 +65238,81 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c(
-        "label",
-        { staticClass: "block text-grey-darker text-sm font-bold mb-2 mt-3" },
-        [_vm._v("\n        Телефон\n    ")]
-      ),
-      _vm._v(" "),
-      _c("Input", {
-        staticStyle: { width: "200px" },
-        attrs: { placeholder: "+7xxxxxxxxxx" },
-        model: {
+  return _c("div", [
+    _c(
+      "label",
+      { staticClass: "block text-grey-darker text-sm font-bold mb-2 mt-3" },
+      [_vm._v("\n        Телефон\n    ")]
+    ),
+    _vm._v(" "),
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
           value: _vm.username,
-          callback: function($$v) {
-            _vm.username = $$v
-          },
           expression: "username"
         }
-      }),
-      _vm._v(" "),
-      _c(
-        "label",
-        { staticClass: "block text-grey-darker text-sm font-bold mb-2 mt-3" },
-        [_vm._v("\n        Пароль\n    ")]
-      ),
-      _vm._v(" "),
-      _c("Input", {
-        staticStyle: { width: "200px" },
-        model: {
+      ],
+      staticClass:
+        "shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight",
+      attrs: { placeholder: "+7xxxxxxxxxx" },
+      domProps: { value: _vm.username },
+      on: {
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.username = $event.target.value
+        }
+      }
+    }),
+    _vm._v(" "),
+    _c(
+      "label",
+      { staticClass: "block text-grey-darker text-sm font-bold mb-2 mt-3" },
+      [_vm._v("\n        Пароль\n    ")]
+    ),
+    _vm._v(" "),
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
           value: _vm.password,
-          callback: function($$v) {
-            _vm.password = $$v
-          },
           expression: "password"
         }
-      }),
-      _vm._v(" "),
-      _c(
-        "div",
-        [
-          _c(
-            "Button",
-            {
-              staticStyle: { width: "200px", "margin-top": "1rem" },
-              attrs: { type: "primary", loading: _vm.loading },
-              on: { click: _vm.sendCode }
-            },
-            [!_vm.loading ? _c("span", [_vm._v("Войти")]) : _vm._e()]
-          )
-        ],
-        1
-      )
-    ],
-    1
-  )
+      ],
+      staticClass:
+        "shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight",
+      domProps: { value: _vm.password },
+      on: {
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.password = $event.target.value
+        }
+      }
+    }),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "text-center" },
+      [
+        _c(
+          "Button",
+          {
+            staticStyle: { width: "200px", "margin-top": "1.5rem" },
+            attrs: { type: "primary", loading: _vm.loading },
+            on: { click: _vm.sendCode }
+          },
+          [!_vm.loading ? _c("span", [_vm._v("Войти")]) : _vm._e()]
+        )
+      ],
+      1
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -65326,83 +65346,98 @@ var render = function() {
           })
         : _vm._e(),
       _vm._v(" "),
-      _c(
-        "div",
-        [
-          _c(
-            "label",
+      _c("div", [
+        _c(
+          "label",
+          { staticClass: "block text-grey-darker text-sm font-bold mb-2 mt-3" },
+          [_vm._v("\n            E-mail адрес\n        ")]
+        ),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
             {
-              staticClass: "block text-grey-darker text-sm font-bold mb-2 mt-3"
-            },
-            [_vm._v("\n            E-mail адрес\n        ")]
-          ),
-          _vm._v(" "),
-          _c("Input", {
-            staticStyle: { width: "200px" },
-            attrs: { placeholder: "example@example.com" },
-            model: {
+              name: "model",
+              rawName: "v-model",
               value: _vm.email,
-              callback: function($$v) {
-                _vm.email = $$v
-              },
               expression: "email"
             }
-          })
-        ],
-        1
-      ),
+          ],
+          staticClass:
+            "shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight",
+          attrs: { placeholder: "example@example.com" },
+          domProps: { value: _vm.email },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.email = $event.target.value
+            }
+          }
+        })
+      ]),
       _vm._v(" "),
-      _c(
-        "div",
-        [
-          _c(
-            "label",
+      _c("div", [
+        _c(
+          "label",
+          { staticClass: "block text-grey-darker text-sm font-bold mb-2 mt-3" },
+          [_vm._v("\n            Имя\n        ")]
+        ),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
             {
-              staticClass: "block text-grey-darker text-sm font-bold mb-2 mt-3"
-            },
-            [_vm._v("\n            Имя\n        ")]
-          ),
-          _vm._v(" "),
-          _c("Input", {
-            staticStyle: { width: "200px" },
-            attrs: { placeholder: "example@example.com" },
-            model: {
+              name: "model",
+              rawName: "v-model",
               value: _vm.name,
-              callback: function($$v) {
-                _vm.name = $$v
-              },
               expression: "name"
             }
-          })
-        ],
-        1
-      ),
+          ],
+          staticClass:
+            "shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight",
+          attrs: { placeholder: "example@example.com" },
+          domProps: { value: _vm.name },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.name = $event.target.value
+            }
+          }
+        })
+      ]),
       _vm._v(" "),
-      _c(
-        "div",
-        [
-          _c(
-            "label",
+      _c("div", [
+        _c(
+          "label",
+          { staticClass: "block text-grey-darker text-sm font-bold mb-2 mt-3" },
+          [_vm._v("\n            Телефон\n        ")]
+        ),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
             {
-              staticClass: "block text-grey-darker text-sm font-bold mb-2 mt-3"
-            },
-            [_vm._v("\n            Телефон\n        ")]
-          ),
-          _vm._v(" "),
-          _c("Input", {
-            staticStyle: { width: "200px" },
-            attrs: { placeholder: "+7xxxxxxxxxx" },
-            model: {
+              name: "model",
+              rawName: "v-model",
               value: _vm.phone,
-              callback: function($$v) {
-                _vm.phone = $$v
-              },
               expression: "phone"
             }
-          })
-        ],
-        1
-      ),
+          ],
+          staticClass:
+            "shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight",
+          attrs: { placeholder: "+7xxxxxxxxxx" },
+          domProps: { value: _vm.phone },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.phone = $event.target.value
+            }
+          }
+        })
+      ]),
       _vm._v(" "),
       _c(
         "div",
@@ -65411,7 +65446,7 @@ var render = function() {
           _c(
             "Button",
             {
-              staticStyle: { width: "200px", "margin-top": ".75rem" },
+              staticStyle: { width: "200px", "margin-top": "1.5rem" },
               attrs: { type: "primary", loading: _vm.loading },
               on: { click: _vm.toLoading }
             },
@@ -65426,7 +65461,7 @@ var render = function() {
             "Button",
             {
               staticClass: "mb-3",
-              staticStyle: { margin: "0.75rem 0 0 0.75rem" },
+              staticStyle: { margin: "1.5rem 0 0 0.75rem" },
               attrs: { type: "success" },
               on: { click: _vm.toLogin }
             },

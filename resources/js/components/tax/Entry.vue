@@ -4,7 +4,7 @@
 
         <Alert>Для получения данных из чеков необходимо быть зарегистрированным в сервисе ФНС.</Alert>
 
-        <Card>
+        <Card style="width: 400px; margin: auto">
 
             <Steps :current="step" class="mt-2">
                 <Step title="Регистрация"></Step>

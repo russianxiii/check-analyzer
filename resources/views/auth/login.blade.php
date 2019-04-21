@@ -72,5 +72,8 @@
                 </div>
             </div>
         </div>
+
+        @include('/common/logo')
+
     </div>
 @endsection

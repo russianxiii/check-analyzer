@@ -44,4 +44,8 @@ return [
         ],
     ],
 
+	'nfs' => [
+		'domain' => env('NFS_ENDPOINT', 'https://proverkacheka.nalog.ru:9999/v1/'),
+	]
+
 ];

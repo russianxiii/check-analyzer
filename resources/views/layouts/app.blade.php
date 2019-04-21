@@ -8,6 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
+    <link rel="icon" href="/images/qr-ruble.png">
 
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
@@ -21,7 +22,7 @@
                     <div class="mr-6">
                         <a href="{{ url('/') }}" class="text-lg font-semibold text-white no-underline">
                         <div class="flex items-center flex-no-shrink text-white mr-6">
-                            <img class="fill-current h-10 w-10 mr-2" width="70" height="70" src="images/navbar-icon.png"/></img>
+                            <img class="fill-current h-10 w-10 mr-2" width="70" height="70" src="/images/qr-ruble.png"/></img>
                             <span class="font-semibold text-xl tracking-tight">{{ config('app.name', 'Laravel') }}</span>
                         </div>
                         </a>
@@ -45,8 +46,10 @@
                 </div>
             </div>
         </nav>
+<div id="analyzer">
+    @yield('content')
+</div>
 
-        @yield('content')
     </div>
 
     <!-- Scripts -->

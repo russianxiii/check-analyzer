@@ -1886,6 +1886,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['phone'],
   data: function data() {
@@ -1893,7 +1918,8 @@ __webpack_require__.r(__webpack_exports__);
       password: '',
       username: this.phone,
       loading: false,
-      error: ''
+      error: '',
+      modalRemind: false
     };
   },
   methods: {
@@ -1921,9 +1947,33 @@ __webpack_require__.r(__webpack_exports__);
             _this.error += errors[key] + '<br>';
           }
         }
-      }).then(function (result) {
+      }).then(function () {
         _this.loading = false;
       });
+    },
+    remindPassword: function remindPassword() {
+      this.modalRemind = true;
+    },
+    sendNew: function sendNew() {
+      var _this2 = this;
+
+      this.loading = true;
+      var params = {
+        phone: this.username
+      };
+      axios.post('fns/remind', params).then(function () {
+        _this2.$Message.info('Пароль отправлен');
+
+        _this2.modalRemind = false;
+      })["catch"](function (error) {
+        console.log(error);
+        if (error.response.data.message.includes('the user was not found')) _this2.$Message.error('Телефон не найден');else _this2.$Message.error('Произошла ошибка, попробуйте позже');
+      }).then(function () {
+        _this2.loading = false;
+      });
+    },
+    cancel: function cancel() {
+      this.modalRemind = false;
     }
   }
 });
@@ -2018,7 +2068,7 @@ __webpack_require__.r(__webpack_exports__);
         name: this.name,
         email: this.email
       };
-      axios.post('fns/registration', params).then(function (response) {
+      axios.post('fns/registration', params).then(function () {
         _this.toLogin();
       })["catch"](function (error) {
         console.log(error);
@@ -2035,7 +2085,7 @@ __webpack_require__.r(__webpack_exports__);
             _this.error += errors[key] + '<br>';
           }
         }
-      }).then(function (result) {
+      }).then(function () {
         _this.loading = false;
       });
     }
@@ -65195,9 +65245,23 @@ var render = function() {
             "Steps",
             { staticClass: "mt-2", attrs: { current: _vm.step } },
             [
-              _c("Step", { attrs: { title: "Регистрация" } }),
+              _c("Step", {
+                attrs: { title: "Регистрация" },
+                nativeOn: {
+                  click: function($event) {
+                    _vm.step = 0
+                  }
+                }
+              }),
               _vm._v(" "),
-              _c("Step", { attrs: { title: "Вход" } })
+              _c("Step", {
+                attrs: { title: "Вход" },
+                nativeOn: {
+                  click: function($event) {
+                    _vm.step = 1
+                  }
+                }
+              })
             ],
             1
           ),
@@ -65252,11 +65316,17 @@ var render = function() {
           rawName: "v-model",
           value: _vm.username,
           expression: "username"
+        },
+        {
+          name: "mask",
+          rawName: "v-mask",
+          value: "+7##########",
+          expression: "'+7##########'"
         }
       ],
       staticClass:
         "shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight",
-      attrs: { placeholder: "+7xxxxxxxxxx" },
+      attrs: { placeholder: "+7xxxxxxxxxx", type: "tel" },
       domProps: { value: _vm.username },
       on: {
         input: function($event) {
@@ -65298,16 +65368,124 @@ var render = function() {
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "text-center" },
+      { staticClass: "flex flex-row" },
       [
         _c(
           "Button",
           {
-            staticStyle: { width: "200px", "margin-top": "1.5rem" },
+            staticStyle: { flex: "1", "margin-top": "1.5rem" },
             attrs: { type: "primary", loading: _vm.loading },
             on: { click: _vm.sendCode }
           },
           [!_vm.loading ? _c("span", [_vm._v("Войти")]) : _vm._e()]
+        ),
+        _vm._v(" "),
+        _c(
+          "Tooltip",
+          { attrs: { content: "Выслать новый пароль" } },
+          [
+            _c(
+              "Button",
+              {
+                staticStyle: { flex: "1", margin: "1.5rem 0 0 0.75rem" },
+                attrs: { type: "warning", loading: _vm.loading },
+                on: { click: _vm.remindPassword }
+              },
+              [!_vm.loading ? _c("span", [_vm._v("Забыли пароль?")]) : _vm._e()]
+            ),
+            _vm._v(" "),
+            _c(
+              "Modal",
+              {
+                attrs: { title: "Восстановление пароля" },
+                on: { "on-cancel": _vm.cancel },
+                model: {
+                  value: _vm.modalRemind,
+                  callback: function($$v) {
+                    _vm.modalRemind = $$v
+                  },
+                  expression: "modalRemind"
+                }
+              },
+              [
+                _c(
+                  "label",
+                  {
+                    staticClass:
+                      "block text-grey-darker text-sm font-bold mb-2 mt-3"
+                  },
+                  [_vm._v("\n                    Телефон\n                ")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.username,
+                      expression: "username"
+                    },
+                    {
+                      name: "mask",
+                      rawName: "v-mask",
+                      value: "+7##########",
+                      expression: "'+7##########'"
+                    }
+                  ],
+                  staticClass:
+                    "shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight",
+                  attrs: { placeholder: "+7xxxxxxxxxx", type: "tel" },
+                  domProps: { value: _vm.username },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.username = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { attrs: { slot: "footer" }, slot: "footer" },
+                  [
+                    _c(
+                      "Button",
+                      {
+                        attrs: { size: "large", loading: _vm.loading },
+                        on: { click: _vm.cancel }
+                      },
+                      [
+                        !_vm.loading
+                          ? _c("span", [_vm._v("Отменить")])
+                          : _vm._e()
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "Button",
+                      {
+                        attrs: {
+                          type: "primary",
+                          loading: _vm.loading,
+                          size: "large"
+                        },
+                        on: { click: _vm.sendNew }
+                      },
+                      [
+                        !_vm.loading
+                          ? _c("span", [_vm._v("Получить новый пароль")])
+                          : _vm._e()
+                      ]
+                    )
+                  ],
+                  1
+                )
+              ]
+            )
+          ],
+          1
         )
       ],
       1
@@ -65364,7 +65542,7 @@ var render = function() {
           ],
           staticClass:
             "shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight",
-          attrs: { placeholder: "example@example.com" },
+          attrs: { type: "email", placeholder: "example@example.com" },
           domProps: { value: _vm.email },
           on: {
             input: function($event) {
@@ -65395,7 +65573,7 @@ var render = function() {
           ],
           staticClass:
             "shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight",
-          attrs: { placeholder: "example@example.com" },
+          attrs: { placeholder: "Ivanov" },
           domProps: { value: _vm.name },
           on: {
             input: function($event) {
@@ -65422,11 +65600,17 @@ var render = function() {
               rawName: "v-model",
               value: _vm.phone,
               expression: "phone"
+            },
+            {
+              name: "mask",
+              rawName: "v-mask",
+              value: "+7##########",
+              expression: "'+7##########'"
             }
           ],
           staticClass:
             "shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight",
-          attrs: { placeholder: "+7xxxxxxxxxx" },
+          attrs: { type: "tel", placeholder: "+7xxxxxxxxxx" },
           domProps: { value: _vm.phone },
           on: {
             input: function($event) {
@@ -65446,7 +65630,7 @@ var render = function() {
           _c(
             "Button",
             {
-              staticStyle: { width: "200px", "margin-top": "1.5rem" },
+              staticStyle: { flex: "1", "margin-top": "1.5rem" },
               attrs: { type: "primary", loading: _vm.loading },
               on: { click: _vm.toLoading }
             },
@@ -65461,7 +65645,7 @@ var render = function() {
             "Button",
             {
               staticClass: "mb-3",
-              staticStyle: { margin: "1.5rem 0 0 0.75rem" },
+              staticStyle: { flex: "1", margin: "1.5rem 0 0 0.75rem" },
               attrs: { type: "success" },
               on: { click: _vm.toLogin }
             },
@@ -77948,15 +78132,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!******************************************************!*\
   !*** ./resources/js/components/tax/Registration.vue ***!
   \******************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Registration_vue_vue_type_template_id_419f16f0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Registration.vue?vue&type=template&id=419f16f0&scoped=true& */ "./resources/js/components/tax/Registration.vue?vue&type=template&id=419f16f0&scoped=true&");
 /* harmony import */ var _Registration_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Registration.vue?vue&type=script&lang=js& */ "./resources/js/components/tax/Registration.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Registration_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Registration_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -77986,7 +78169,7 @@ component.options.__file = "resources/js/components/tax/Registration.vue"
 /*!*******************************************************************************!*\
   !*** ./resources/js/components/tax/Registration.vue?vue&type=script&lang=js& ***!
   \*******************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -78021,8 +78204,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\checkAnalyzer\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\checkAnalyzer\resources\css\app.css */"./resources/css/app.css");
+__webpack_require__(/*! /Users/paveldrejzer/sites/check-analyzer/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/paveldrejzer/sites/check-analyzer/resources/css/app.css */"./resources/css/app.css");
 
 
 /***/ })

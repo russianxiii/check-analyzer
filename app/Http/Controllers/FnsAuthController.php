@@ -84,4 +84,22 @@ class FnsAuthController extends Controller
 		return response()->json('',200);
 	}
 
+    public function remind(Request $request)
+    {
+        $request->validate([
+            'phone' => 'required|numeric'
+        ]);
+
+        $sendParams = [
+            'Content-Type' => 'application/json; charset=UTF-8',
+            RequestOptions::JSON => $request->all()
+        ];
+
+        $client = new Client();
+        $client->post(config('services.nfs.domain').'mobile/users/restore', $sendParams);
+
+
+        return response()->json('',200);
+    }
+
 }

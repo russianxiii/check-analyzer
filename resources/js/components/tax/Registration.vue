@@ -10,7 +10,7 @@
                 E-mail адрес
             </label>
 
-            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight" v-model="email" placeholder="example@example.com">
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight" v-model="email" type="email" placeholder="example@example.com">
 
         </div>
 
@@ -20,7 +20,7 @@
                 Имя
             </label>
 
-            <input v-model="name" placeholder="example@example.com" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight">
+            <input v-model="name" placeholder="Ivanov" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight">
 
         </div>
 
@@ -30,18 +30,18 @@
                 Телефон
             </label>
 
-            <input v-model="phone" placeholder="+7xxxxxxxxxx" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight">
+            <input v-model="phone" type="tel" v-mask="'+7##########'" placeholder="+7xxxxxxxxxx" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight">
 
         </div>
 
         <div class="flex flex-row">
 
-            <Button type="primary" :loading="loading" @click="toLoading" style="width: 200px; margin-top: 1.5rem">
+            <Button type="primary" :loading="loading" @click="toLoading" style="flex: 1; margin-top: 1.5rem">
                 <span v-if="!loading">Получить пароль</span>
                 <span v-else>Loading...</span>
             </Button>
 
-            <Button type="success" class="mb-3" @click="toLogin" style="margin: 1.5rem 0 0 0.75rem;">Уже зарегистрированы?</Button>
+            <Button type="success" class="mb-3" @click="toLogin" style="flex: 1; margin: 1.5rem 0 0 0.75rem;">Уже зарегистрированы?</Button>
 
         </div>
 
@@ -81,7 +81,7 @@
                 };
                 axios
                     .post('fns/registration', params)
-                    .then(response => {
+                    .then(() => {
                         this.toLogin();
                     })
                     .catch(error => {
@@ -97,7 +97,7 @@
                             }
                         }
                     })
-                    .then(result => {
+                    .then(() => {
                         this.loading = false;
                     });
             }

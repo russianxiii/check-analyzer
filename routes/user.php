@@ -15,5 +15,6 @@ Route::prefix('fns')->group(function () {
 
 	Route::post('registration','FnsAuthController@registration');
 	Route::post('login','FnsAuthController@login');
+    Route::post('remind','FnsAuthController@remind');
 
 });

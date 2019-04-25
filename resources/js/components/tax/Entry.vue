@@ -7,8 +7,8 @@
         <Card style="width: 400px; margin: auto">
 
             <Steps :current="step" class="mt-2">
-                <Step title="Регистрация"></Step>
-                <Step title="Вход"></Step>
+                <Step @click.native="step = 0" title="Регистрация"></Step>
+                <Step @click.native="step = 1" title="Вход"></Step>
             </Steps>
 
             <Divider/>

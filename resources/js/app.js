@@ -25,6 +25,7 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('tax-entry', require('./components/tax/Entry.vue').default);
+Vue.component('checks-index', require('./components/checks/Index.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

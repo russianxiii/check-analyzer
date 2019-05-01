@@ -14,8 +14,8 @@
         </label>
 
         <input v-model="password"
-               class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight">
-
+               class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight"
+               type="password" placeholder="*************">
         <div class="flex flex-row">
 
             <Button type="primary" :loading="loading" @click="sendCode" style="flex: 1; margin-top: 1.5rem">
@@ -73,8 +73,8 @@
                 };
                 axios
                     .post('fns/login', params)
-                    .then(response => {
-                        //this.toLogin();
+                    .then(() => {
+                        window.location.href='/check';
                     })
                     .catch(error => {
                         console.log(error);

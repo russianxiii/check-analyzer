@@ -12,6 +12,8 @@ use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
 use Illuminate\Support\Facades\Auth;
+use App\FnsLogin;
+
 
 use Debugbar;
 
@@ -22,10 +24,10 @@ class FnsAuthController extends Controller
 	 *
 	 * @return void
 	 */
-//	public function __construct()
-//	{
-//		$this->middleware('auth');
-//	}
+	public function __construct()
+	{
+		$this->middleware('verified');
+	}
 
 	/**
 	 * Registration in FNS.
@@ -53,7 +55,7 @@ class FnsAuthController extends Controller
 	}
 
 	/**
-	 * Registration in FNS.
+	 * Login in FNS.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
@@ -66,8 +68,6 @@ class FnsAuthController extends Controller
 
 		$params = $request->all();
 
-		$phonePassBase64 = base64_encode($params['phone'].':'.$params['password']);
-
 		$client = new Client();
 		$result = $client->get(config('services.nfs.domain').'mobile/users/login', [
 				'auth' => [
@@ -78,7 +78,9 @@ class FnsAuthController extends Controller
 		);
 
 		if ($result->getStatusCode() == 200) {
-
+           FnsLogin::updateOrCreate(
+                ['user_id' => Auth::id()],
+                ['username' => $params['phone'], 'password' => $params['password']]);
 		}
 
 		return response()->json('',200);

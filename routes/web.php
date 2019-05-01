@@ -26,7 +26,3 @@ Route::group(['middleware' => ['web','verified']], function () {
 	include 'user.php';
 });
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-

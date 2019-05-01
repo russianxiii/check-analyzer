@@ -13,12 +13,12 @@ class CreateFnsLoginsTable extends Migration
      */
     public function up()
     {
-	    Schema::create('login_fns', function (Blueprint $table) {
+	    Schema::create('fns_logins', function (Blueprint $table) {
 		    $table->bigIncrements('id');
 		    $table->unsignedBigInteger('user_id');
 		    $table->foreign('user_id')->references('id')->on('users');
-		    $table->string('username')->comment('Логин пользователя');
-		    $table->string('password')->comment('Пароль пользователя');
+		    $table->string('username')->nullable()->comment('Логин пользователя');
+		    $table->string('password')->nullable()->comment('Пароль пользователя');
 		    $table->timestamps();
 	    });
     }

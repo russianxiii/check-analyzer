@@ -11,6 +11,14 @@ class User extends Authenticatable implements MustVerifyEmail
     use Notifiable;
 
     /**
+     * Get the phone record associated with the user.
+     */
+    public function fns()
+    {
+        return $this->hasOne('App\FnsLogin');
+    }
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array

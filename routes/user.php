@@ -6,10 +6,7 @@
  * Time: 14:22
  */
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/', function () {
-	return redirect('/home');
-});
+Route::get('/', 'HomeController@index')->name('home');
 
 Route::prefix('fns')->group(function () {
 
@@ -18,3 +15,5 @@ Route::prefix('fns')->group(function () {
     Route::post('remind','FnsAuthController@remind');
 
 });
+
+Route::resource('check', 'CheckController');
